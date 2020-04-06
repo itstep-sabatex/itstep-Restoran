@@ -1,4 +1,5 @@
-﻿using RestoranClient.Data;
+﻿using Microsoft.EntityFrameworkCore;
+using RestoranClient.Data;
 using RestoranClient.Models;
 using System;
 using System.Collections.Generic;
@@ -69,8 +70,10 @@ namespace RestoranClient
         {
             using (var context = new RestoranDbContext())
             {
-                var r = context.Order.Where(w => w.waiter_id == Config.WaiterId)
-                    .Join(context.Abonent, ws => ws.abonent_id, ab => ab.id, (ws, ab) => new MainWindowViewModel { id = ws.id, time_order = ws.time_order.ToString("H:mm:ss"), abonent = ab.name, Bill = ws.bill }).ToArray();
+                var r = context.Order.Where(w => w.WaiterId == Config.WaiterId)
+                    .Join(context.Abonent, ws => ws.AbonentId, ab => ab.Id, (ws, ab) => new MainWindowViewModel { id = ws.Id, time_order = ws.TimeOrder.ToString("H:mm:ss"), abonent = ab.Name, Bill = ws.Bill }).ToArray();
+                //var s = context.Order.Where(w => w.WaiterId == Config.WaiterId).Include("Abonent").ToArray();
+
 
                 dg.ItemsSource = new ObservableCollection<MainWindowViewModel>(r);
             }
@@ -116,6 +119,7 @@ namespace RestoranClient
         {
             using (var context = new RestoranDbContext())
             {
+                //context.Order.Add(obj);
                 context.Order.Update(obj);
                 context.SaveChanges();
             }
@@ -134,6 +138,7 @@ namespace RestoranClient
                 Config.WaiterName = arg2;
                 Title = $"Офіціант {Config.WaiterName} : {DateTime.Now}";
                 login.Visibility = Visibility.Hidden;
+                RefreshGrid();
                 mainForm.Visibility = Visibility.Visible;
             }
 

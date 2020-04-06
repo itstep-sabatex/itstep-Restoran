@@ -1,14 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace RestoranClient.Models
 {
-    public class Abonent
+    public partial class ClientCards
     {
-        public int Id { get; set; }
+        public Guid Id { get; set; }
         public string Name { get; set; }
+        public decimal Discount { get; set; }
     }
-
- 
 }

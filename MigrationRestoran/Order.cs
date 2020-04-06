@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace MigrationRestoran
 {
@@ -13,6 +14,7 @@ namespace MigrationRestoran
         public DateTime TimeOrder { get; set; }
         public DateTime? EndOrder { get; set; }
         public decimal? Bill { get; set; }
+
         public int Id { get; set; }
         public int? WaiterId { get; set; }
         public int? AbonentId { get; set; }

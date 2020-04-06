@@ -35,9 +35,7 @@ namespace RestoranClient
 
         public void ShowOrderEdit(Order order = null)
         {
-            cbAbonent.ItemsSource = Config.Abonents;
-            cbSource.ItemsSource = Config.SourceItems;
-            
+           
              
             using (var context = new RestoranDbContext())
             {
@@ -45,23 +43,29 @@ namespace RestoranClient
                 {
                     Order = new Order
                     {
-                        abonent_id = Config.Abonents[0]?.id,
-                        waiter_id = Config.WaiterId,
-                        source_id = Config.SourceItems[0]?.id,
-                        time_order = DateTime.Now,
+                        AbonentId = Config.Abonents[0]?.Id,
+                        WaiterId = Config.WaiterId,
+                        SourceId = Config.SourceItems[0]?.Id,
+                        TimeOrder = DateTime.Now,
                         Details = new List<Detail>()
                     };
                 }
                 else
                 {
-                    Order = context.Order.Include("Details").SingleOrDefault(pk => pk.id == order.id);
+                    Order = context.Order.Include("Details").SingleOrDefault(pk => pk.Id == order.Id);
                 }
             }
+            cbAbonent.ItemsSource = Config.Abonents;
+            //cbAbonent.DisplayMemberPath = "Name";
+            //cbAbonent.SelectedValuePath = "Id";
+            cbAbonent.SelectedValue = Order.AbonentId;
 
-            cbAbonent.SelectedValue = Order.abonent_id;
-            cbSource.SelectedValue = Order.source_id;
-            dpStart.Text = Order.time_order.ToString("H.mm.ss");
-            dpEnd.Text = Order.end_order?.ToString("H.mm.ss") ?? "Активний";
+            cbSource.ItemsSource = Config.SourceItems;
+ 
+
+            cbSource.SelectedValue = Order.SourceId;
+            dpStart.Text = Order.TimeOrder.ToString("H.mm.ss");
+            dpEnd.Text = Order.EndOrder?.ToString("H.mm.ss") ?? "Активний";
 
             //grid
             cbitem.ItemsSource = Config.FoodItems;
@@ -73,6 +77,12 @@ namespace RestoranClient
         private void SaveOrder(object sender, RoutedEventArgs e)
         {
             Visibility = Visibility.Hidden;
+            Order.AbonentId = (int)cbAbonent.SelectedValue;
+            Order.SourceId = (int)cbSource.SelectedValue;
+            var cl = dgOrder.ItemsSource as ObservableCollection<Detail>;
+            Order.Details = cl.ToList();
+
+
             OnSaveOrder?.Invoke(Order);
         }
 

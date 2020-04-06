@@ -38,10 +38,10 @@ namespace RestoranClient
         {
             using (var context = new RestoranDbContext())
             {
-                var r = context.Waiters.SingleOrDefault(s => s.id == WaiterId);
-                if (r?.password == passwordPB.Password)
+                var r = context.Waiters.SingleOrDefault(s => s.Id == WaiterId);
+                if (r?.Password == passwordPB.Password)
                 {
-                    LoginResult?.Invoke(r.id, r.name);
+                    LoginResult?.Invoke(r.Id, r.Name);
                 }
                 else
                 {
@@ -58,7 +58,7 @@ namespace RestoranClient
         {
             using (var context = new RestoranDbContext())
             {
-                var r = context.Waiters.Select(s => new { id = s.id, name = s.name }).ToArray();
+                var r = context.Waiters.Select(s => new { id = s.Id, name = s.Name }).ToArray();
                 waitersCB.ItemsSource = r;
                 if (r.Length == 0)
                     throw new Exception("В базі відсутні офіціанти");

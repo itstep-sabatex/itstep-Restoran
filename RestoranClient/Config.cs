@@ -23,7 +23,7 @@ namespace RestoranClient
             {
                 Abonents = context.Abonent.ToArray();
                 SourceItems = context.Sources.ToArray();
-                FoodItems = context.Items.ToArray();
+                FoodItems = context.FoodItems.ToArray();
             }
         }
 

@@ -5,7 +5,8 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:RestoranClient"
              mc:Ignorable="d" 
-             d:DesignWidth="600" BorderThickness="1" Loaded="UserControl_Loaded" x:Name="userControl">
+             d:DesignWidth="600" Loaded="UserControl_Loaded" x:Name="userControl">
+    <Border BorderBrush="Black"  BorderThickness="1" CornerRadius="5">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
@@ -39,4 +40,5 @@
         </Grid>
 
     </Grid>
+    </Border>
 </UserControl>

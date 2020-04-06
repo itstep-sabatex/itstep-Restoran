@@ -20,8 +20,8 @@
                 <RowDefinition Height="auto"/>
                 <RowDefinition Height="auto"/>
             </Grid.RowDefinitions>
-            <Button Click="SaveOrder">Записати</Button>
-            <Button Grid.Column="1" Click="CancelOrder">Відмовитись</Button>
+            <Button Template="{StaticResource RoundedButtonTemplate}" Click="SaveOrder">Записати</Button>
+            <Button Template="{StaticResource RoundedButtonTemplate}" Grid.Column="1" Click="CancelOrder">Відмовитись</Button>
             <Grid Grid.Row="1">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="auto"/>
@@ -32,9 +32,9 @@
                     <ColumnDefinition />
                 </Grid.ColumnDefinitions>
                 <Label>Столик</Label>
-                <ComboBox Grid.Column="1" x:Name="cbAbonent" DisplayMemberPath = "name" SelectedValuePath = "id" />
+                <ComboBox Grid.Column="1" x:Name="cbAbonent" DisplayMemberPath = "Name" SelectedValuePath = "Id" />
                 <Label Grid.Row="1">Звідки</Label>
-                <ComboBox Grid.Row="1" Grid.Column="1" x:Name="cbSource" DisplayMemberPath = "name" SelectedValuePath = "id"/>
+                <ComboBox Grid.Row="1" Grid.Column="1" x:Name="cbSource" DisplayMemberPath = "Name" SelectedValuePath = "Id"/>
 
             </Grid>
             <Grid Grid.Row="1" Grid.Column="1">
@@ -56,7 +56,7 @@
         </Grid>
         <DataGrid Grid.Row="1" x:Name="dgOrder" AutoGenerateColumns="False">
             <DataGrid.Columns>
-                <DataGridComboBoxColumn Header="Страва" x:Name="cbitem" Width="*" SelectedValueBinding="{Binding ItemsId}" DisplayMemberPath = "name" SelectedValuePath = "id"/>
+                <DataGridComboBoxColumn Header="Страва" x:Name="cbitem" Width="*" SelectedValueBinding="{Binding ItemsId}" DisplayMemberPath = "Name" SelectedValuePath = "Id"/>
                 <DataGridTextColumn Header="Кількість" Binding="{Binding Count}" Width="auto"/>
             </DataGrid.Columns>
 

@@ -6,13 +6,16 @@ namespace RestoranClient.Models
 {
     public class Order
     {
-        public int id { get; set; }
-        public int? waiter_id { get; set; }
-        public int? abonent_id { get; set; }
-        public DateTime time_order { get; set; }
-        public decimal? bill { get; set; }
-        public int? source_id { get; set; }
-        public DateTime? end_order { get; set; }
+        public int Id { get; set; }
+        public int? WaiterId { get; set; }
+
+        public int? AbonentId { get; set; }
+        public Abonent Abonent { get; set; }
+        public DateTime TimeOrder { get; set; }
+        public decimal? Bill { get; set; }
+
+        public int? SourceId { get; set; }
+        public DateTime? EndOrder { get; set; }
         public List<Detail> Details { get; set; }
 
     }
