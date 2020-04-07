@@ -33,13 +33,14 @@ namespace RestoranClient
         public Order Order { get; set; }
 
 
-        public void ShowOrderEdit(Order order = null)
+        public void ShowOrderEdit(int?  id = null)
         {
            
              
             using (var context = new RestoranDbContext())
             {
-                if (order == null)
+                var directionSQL = context.Abonent.FromSqlRaw("SELECT * FROM dbo.abonent").ToList();
+                if (id == null)
                 {
                     Order = new Order
                     {
@@ -52,7 +53,7 @@ namespace RestoranClient
                 }
                 else
                 {
-                    Order = context.Order.Include("Details").SingleOrDefault(pk => pk.Id == order.Id);
+                    Order = context.Order.Include("Details").SingleOrDefault(pk => pk.Id == id);
                 }
             }
             cbAbonent.ItemsSource = Config.Abonents;
@@ -64,6 +65,7 @@ namespace RestoranClient
  
 
             cbSource.SelectedValue = Order.SourceId;
+            
             dpStart.Text = Order.TimeOrder.ToString("H.mm.ss");
             dpEnd.Text = Order.EndOrder?.ToString("H.mm.ss") ?? "Активний";
 
@@ -79,11 +81,19 @@ namespace RestoranClient
             Visibility = Visibility.Hidden;
             Order.AbonentId = (int)cbAbonent.SelectedValue;
             Order.SourceId = (int)cbSource.SelectedValue;
+            Order.FixedSource = (FixSource)(Order.SourceId - 1);
             var cl = dgOrder.ItemsSource as ObservableCollection<Detail>;
+            decimal bill = 0;
+            foreach (var d in cl)
+            {
+                d.Price = Config.FoodItems.Single(k => k.Id == d.ItemsId).Price;
+                d.Bill = d.Price * d.Count;
+                bill = bill + d.Bill;
+            }
+            Order.Bill = bill;
             Order.Details = cl.ToList();
-
-
             OnSaveOrder?.Invoke(Order);
+
         }
 
         private void CancelOrder(object sender, RoutedEventArgs e)

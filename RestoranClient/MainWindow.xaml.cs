@@ -72,10 +72,7 @@ namespace RestoranClient
             {
                 var r = context.Order.Where(w => w.WaiterId == Config.WaiterId)
                     .Join(context.Abonent, ws => ws.AbonentId, ab => ab.Id, (ws, ab) => new MainWindowViewModel { id = ws.Id, time_order = ws.TimeOrder.ToString("H:mm:ss"), abonent = ab.Name, Bill = ws.Bill }).ToArray();
-                //var s = context.Order.Where(w => w.WaiterId == Config.WaiterId).Include("Abonent").ToArray();
-
-
-                dg.ItemsSource = new ObservableCollection<MainWindowViewModel>(r);
+                 dg.ItemsSource = new ObservableCollection<MainWindowViewModel>(r);
             }
         }
 
@@ -120,7 +117,14 @@ namespace RestoranClient
             using (var context = new RestoranDbContext())
             {
                 //context.Order.Add(obj);
+                //
+                //obj.Details.Clear();
                 context.Order.Update(obj);
+                //context.SaveChanges();
+
+                //obj.Details.Add(new Detail() { ItemsId = 1,Price = 10,Count = 2,Bill=20
+                //});
+                //context.Order.Add(obj);
                 context.SaveChanges();
             }
             RefreshGrid();
@@ -141,6 +145,18 @@ namespace RestoranClient
                 RefreshGrid();
                 mainForm.Visibility = Visibility.Visible;
             }
+
+        }
+
+        private void dg_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            mainForm.Visibility = Visibility.Collapsed;
+            var item = dg.CurrentItem as MainWindowViewModel;
+            orderEdit.ShowOrderEdit(item.id);
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
 
         }
     }

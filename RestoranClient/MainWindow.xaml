@@ -16,12 +16,18 @@
         <StackPanel>
                 <Button Click="AddOrder" >Додати замовлення</Button>   
         </StackPanel>
-        <DataGrid Grid.Row="1" x:Name="dg" AutoGenerateColumns="False">
+        <DataGrid Grid.Row="1" x:Name="dg" AutoGenerateColumns="False" IsReadOnly="True" MouseDoubleClick="dg_MouseDoubleClick">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Час замовлення" Binding="{Binding time_order}" Width="Auto"/>
                 <DataGridTextColumn Header="Столик" Binding="{Binding abonent}" Width="*"/>
                 <DataGridTextColumn Header="Замовлено" Binding="{Binding Bill}" Width="*"/>
-
+                    <DataGridTemplateColumn>
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button Click="Button_Click">Оплата</Button> 
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
             </DataGrid.Columns>
         </DataGrid>
     </Grid>

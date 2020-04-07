@@ -36,6 +36,27 @@ namespace RestoranClient
         }
         private void Button_Click_Ok(object sender, RoutedEventArgs e)
         {
+            CheckPassword();
+            //using (var context = new RestoranDbContext())
+            //{
+            //    var r = context.Waiters.SingleOrDefault(s => s.Id == WaiterId);
+            //    if (r?.Password == passwordPB.Password)
+            //    {
+            //        LoginResult?.Invoke(r.Id, r.Name);
+            //    }
+            //    else
+            //    {
+            //        passwordCounter--;
+            //        if (passwordCounter == 0)
+            //            LoginResult?.Invoke(null, string.Empty);
+            //        errorBlock.Text = $"Пароль введено неправильно, спробуйте ще {passwordCounter} раз.";
+            //        errorBlock.Visibility = Visibility.Visible;
+            //    }
+            //}
+        }
+
+        private void CheckPassword()
+        {
             using (var context = new RestoranDbContext())
             {
                 var r = context.Waiters.SingleOrDefault(s => s.Id == WaiterId);
@@ -52,6 +73,7 @@ namespace RestoranClient
                     errorBlock.Visibility = Visibility.Visible;
                 }
             }
+
         }
 
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
@@ -69,6 +91,12 @@ namespace RestoranClient
         private void passwordPB_GotFocus(object sender, RoutedEventArgs e)
         {
             errorBlock.Visibility = Visibility.Collapsed;
+        }
+
+        private void passwordPB_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+                CheckPassword();
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using RestoranClient.Models;
 using System;
 using System.Collections.Generic;
@@ -13,6 +14,7 @@ namespace RestoranClient.Data
         public DbSet<Abonent> Abonent { get; set; }
         public DbSet<SourceItem> Sources { get; set; }
         public DbSet<FoodItem> FoodItems { get; set; }
+        public DbSet<Detail> Details { get; set; }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             base.OnConfiguring(optionsBuilder);
@@ -32,6 +34,8 @@ namespace RestoranClient.Data
                     .HasColumnName("name")
                     .HasMaxLength(50)
                     .IsUnicode(false);
+                entity.HasData(new Abonent { Id = 1, Name = "Table1" },
+                               new Abonent { Id = 2, Name = "Table2" });
             });
             modelBuilder.Entity<ClientCards>(entity =>
             {
@@ -63,7 +67,9 @@ namespace RestoranClient.Data
                     .HasColumnType("numeric(18, 2)");
             });
 
-
+            var sourceConverter = new ValueConverter<FixSource, string>(
+                    v => v.ToString(),
+                    v => (FixSource)Enum.Parse(typeof(FixSource), v));
             modelBuilder.Entity<Order>(entity =>
             {
                 entity.Property(p => p.WaiterId).HasColumnName("waiter_id");
@@ -71,6 +77,9 @@ namespace RestoranClient.Data
                 entity.Property(p => p.SourceId).HasColumnName("source_id");
                 entity.Property(p => p.TimeOrder).HasColumnName("time_order");
                 entity.Property(p => p.EndOrder).HasColumnName("end_order");
+
+
+                entity.Property(p => p.FixedSource).HasConversion(sourceConverter);
             });
             modelBuilder.Entity<Detail>(entity =>
             {

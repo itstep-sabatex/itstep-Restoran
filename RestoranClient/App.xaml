@@ -5,12 +5,6 @@
              StartupUri="MainWindow.xaml">
 
     <Application.Resources>
-        <Style TargetType="Button" >
-            <!--Default Button content to be the Text provided from the Command.-->
-            <Setter Property="Content" 
-          Value="{Binding RelativeSource={RelativeSource Self}, 
-           Path=Command.Text}"/>
-        </Style>
         <ControlTemplate x:Key="RoundedButtonTemplate" TargetType="{x:Type Button}">
             <Border x:Name="border" 
                     CornerRadius="5" 
@@ -41,6 +35,15 @@
                 </Trigger>
             </ControlTemplate.Triggers>
         </ControlTemplate>
+
+
+        <Style TargetType="Button" >
+            <!--Default Button content to be the Text provided from the Command.-->
+            <Setter Property="Content" 
+          Value="{Binding RelativeSource={RelativeSource Self}, 
+           Path=Command.Text}"/>
+            <Setter Property="Template" Value="{StaticResource RoundedButtonTemplate}"/>
+        </Style>
         
     </Application.Resources>
 </Application>
