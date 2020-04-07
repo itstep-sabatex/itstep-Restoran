@@ -57,8 +57,6 @@ namespace RestoranClient
                 }
             }
             cbAbonent.ItemsSource = Config.Abonents;
-            //cbAbonent.DisplayMemberPath = "Name";
-            //cbAbonent.SelectedValuePath = "Id";
             cbAbonent.SelectedValue = Order.AbonentId;
 
             cbSource.ItemsSource = Config.SourceItems;
