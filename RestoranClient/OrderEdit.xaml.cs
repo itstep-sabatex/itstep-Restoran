@@ -46,7 +46,7 @@ namespace RestoranClient
                     {
                         AbonentId = Config.Abonents[0]?.Id,
                         WaiterId = Config.WaiterId,
-                        SourceId = Config.SourceItems[0]?.Id,
+                        FixedSource = FixSource.Kitchen,
                         TimeOrder = DateTime.Now,
                         Details = new List<Detail>()
                     };
@@ -59,10 +59,8 @@ namespace RestoranClient
             cbAbonent.ItemsSource = Config.Abonents;
             cbAbonent.SelectedValue = Order.AbonentId;
 
-            cbSource.ItemsSource = Config.SourceItems;
- 
-
-            cbSource.SelectedValue = Order.SourceId;
+            cbSource.ItemsSource = Enum.GetValues(typeof(FixSource));
+            cbSource.SelectedValue = Order.FixedSource;
             
             dpStart.Text = Order.TimeOrder.ToString("H.mm.ss");
             dpEnd.Text = Order.EndOrder?.ToString("H.mm.ss") ?? "Активний";

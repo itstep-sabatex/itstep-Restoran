@@ -4,6 +4,7 @@ using RestoranClient.Models;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -26,7 +27,7 @@ namespace RestoranClient
     {
         public ObservableCollection<MainWindowViewModel> Orders { get; set; }
         public Abonent[] Abonents { get; set; }
-        public SourceItem[] SourceItems { get; set; }
+        //public SourceItem[] SourceItems { get; set; }
         public FoodItem[] FoodItems { get; set; }
 
         public ObservableCollection<Detail> Details { get; set; }
@@ -73,6 +74,20 @@ namespace RestoranClient
                 var r = context.Order.Where(w => w.WaiterId == Config.WaiterId)
                     .Join(context.Abonent, ws => ws.AbonentId, ab => ab.Id, (ws, ab) => new MainWindowViewModel { id = ws.Id, time_order = ws.TimeOrder.ToString("H:mm:ss"), abonent = ab.Name, Bill = ws.Bill }).ToArray();
                  dg.ItemsSource = new ObservableCollection<MainWindowViewModel>(r);
+                //var items = context.Order.ToArray();
+                //var s = new StringBuilder();
+                //foreach (var v in items)
+                //{
+                //    var str = "new Order { Id ="
+                //        + $" {v.Id}, WaiterId = {v.WaiterId}, AbonentId = {v.AbonentId}, TimeOrder";
+
+                //    s.AppendLine("new FoodItem { Name ="+$" \"{v.Name}\",Price = {v.Price}M, Id = {v.Id}"+" },");
+                //}
+                //var st = s.ToString();
+                //File.WriteAllText("sql.txt", st);
+                
+
+
             }
         }
 

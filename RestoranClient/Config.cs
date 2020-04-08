@@ -13,7 +13,7 @@ namespace RestoranClient
     {
         public static IConfigurationRoot Configuration { get; set; }
         public static Abonent[] Abonents { get; set; }
-        public static SourceItem[] SourceItems { get; set; }
+        //public static SourceItem[] SourceItems { get; set; }
         public static FoodItem[] FoodItems { get; set; }
 
 
@@ -22,7 +22,7 @@ namespace RestoranClient
             using (var context = new RestoranDbContext())
             {
                 Abonents = context.Abonent.ToArray();
-                SourceItems = context.Sources.ToArray();
+                //SourceItems = context.Sources.ToArray();
                 FoodItems = context.FoodItems.ToArray();
             }
         }

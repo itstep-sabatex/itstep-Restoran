@@ -34,7 +34,7 @@
                 <Label>Столик</Label>
                 <ComboBox Grid.Column="1" x:Name="cbAbonent" DisplayMemberPath = "Name" SelectedValuePath = "Id" />
                 <Label Grid.Row="1">Звідки</Label>
-                <ComboBox Grid.Row="1" Grid.Column="1" x:Name="cbSource" DisplayMemberPath = "Name" SelectedValuePath = "Id"/>
+                <ComboBox Grid.Row="1" Grid.Column="1" x:Name="cbSource" />
 
             </Grid>
             <Grid Grid.Row="1" Grid.Column="1">
