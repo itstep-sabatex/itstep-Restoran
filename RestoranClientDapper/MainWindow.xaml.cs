@@ -71,34 +71,20 @@ namespace RestoranClient
 
         private void RefreshGrid()
         {
-            using (var context = new RestoranDbContext())
-            {
-                 var r = context.Order.Where(w => w.WaiterId == Config.WaiterId)
-                    .Join(context.Abonent, ws => ws.AbonentId, ab => ab.Id, (ws, ab) => new MainWindowViewModel { id = ws.Id, time_order = ws.TimeOrder.ToString("H:mm:ss"), abonent = ab.Name, Bill = ws.Bill }).ToArray();
-                 dg.ItemsSource = new ObservableCollection<MainWindowViewModel>(r);
-                //var items = context.Order.ToArray();
-                //var s = new StringBuilder();
-                //foreach (var v in items)
-                //{
-                //    var str = "new Order { Id ="
-                //        + $" {v.Id}, WaiterId = {v.WaiterId}, AbonentId = {v.AbonentId}, TimeOrder";
-
-                //    s.AppendLine("new FoodItem { Name ="+$" \"{v.Name}\",Price = {v.Price}M, Id = {v.Id}"+" },");
-                //}
-                //var st = s.ToString();
-                //File.WriteAllText("sql.txt", st);
-                
+            //using (var context = new RestoranDbContext())
+            //{
+            //    var r = context.Order.Where(w => w.WaiterId == Config.WaiterId)
+            //       .Join(context.Abonent, ws => ws.AbonentId, ab => ab.Id, (ws, ab) => new MainWindowViewModel { id = ws.Id, time_order = ws.TimeOrder.ToString("H:mm:ss"), abonent = ab.Name, Bill = ws.Bill }).ToArray();
+            //    dg.ItemsSource = new ObservableCollection<MainWindowViewModel>(r);
+            //}
 
 
-            }
+
             using (var connection = new SqlConnection(Config.ConnectionString))
             {
-                string sqlmainWindowViewModel = $"select [Order].Id, [Order].time_order,[Order].Bill,[abonent].name  from [Order] left join abonent on abonent.id = [Order].abonent_id where[Order].waiter_id = @waiter_id";
-                var r = connection.Query(sqlmainWindowViewModel,new { waiter_id = Config.WaiterId }).ToArray();
-
-
-
-
+                string sqlmainWindowViewModel = $"select [Order].Id, [Order].time_order,[Order].Bill,[abonent].name as abonent  from [Order] left join abonent on abonent.id = [Order].abonent_id where[Order].waiter_id = @waiter_id";
+                var r = connection.Query<MainWindowViewModel>(sqlmainWindowViewModel,new { waiter_id = Config.WaiterId }).ToArray();
+                dg.ItemsSource = new ObservableCollection<MainWindowViewModel>(r);
             }
         
         }
