@@ -18,7 +18,8 @@ namespace RestoranClient.Data
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             base.OnConfiguring(optionsBuilder);
-            optionsBuilder.UseSqlServer(Config.Configuration.GetSection("ConnectionStrings").GetSection("DefaultConnection").Value);
+            //optionsBuilder.UseNpgsql(Config.Configuration.GetSection("ConnectionStrings").GetSection("DefaultConnection").Value);
+            optionsBuilder.UseSqlServer("Data Source=192.168.10.20;Initial Catalog=RestorantNew;Persist Security Info=True;User ID=sa;Password=Aa12345678");
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -95,7 +96,7 @@ namespace RestoranClient.Data
             {
                 entity.Property(p => p.WaiterId).HasColumnName("waiter_id");
                 entity.Property(p => p.AbonentId).HasColumnName("abonent_id");
-                entity.Property(p => p.SourceId).HasColumnName("source_id");
+                //entity.Property(p => p.SourceId).HasColumnName("source_id");
                 entity.Property(p => p.TimeOrder).HasColumnName("time_order");
                 entity.Property(p => p.EndOrder).HasColumnName("end_order");
                 entity.Property(p => p.FixedSource).HasConversion(sourceConverter);
@@ -133,7 +134,12 @@ new Detail { Id = 11, ItemsId = 16, OrderId = 9, Price = 1000.00M, Count = 5.000
 new Detail { Id = 12, ItemsId = 11, OrderId = 9, Price = 95.00M, Count = 20.000M, Bill = 1900.00M });
 
             });
-
+            modelBuilder.Entity<Waiter>(entity =>
+            {
+                 entity.HasData(new Waiter { Id = 1, Name = "Andrea", Password = "1111" },
+                               new Waiter { Id = 2, Name = "Suzane", Password = "2222" },
+                               new Waiter { Id = 3, Name = "Ivanka", Password = "3333" });
+            });
         }
 
     }
