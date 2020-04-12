@@ -1,0 +1,8 @@
+{
+  "runtimeOptions": {
+    "additionalProbingPaths": [
+      "C:\\Users\\pokri\\.dotnet\\store\\|arch|\\|tfm|",
+      "C:\\Users\\pokri\\.nuget\\packages"
+    ]
+  }
+}
