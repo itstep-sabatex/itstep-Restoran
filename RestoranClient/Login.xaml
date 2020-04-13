@@ -4,41 +4,60 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:RestoranClient"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        TextElement.FontWeight="Regular"
+        TextElement.FontSize="13"
+        TextOptions.TextFormattingMode="Ideal"
+        TextOptions.TextRenderingMode="Auto"
+        Background="{DynamicResource MaterialDesignPaper}"
+        FontFamily="{DynamicResource MaterialDesignFont}"
              mc:Ignorable="d" 
              d:DesignWidth="600" Loaded="UserControl_Loaded" x:Name="userControl">
-    <Border BorderBrush="Black"  BorderThickness="1" CornerRadius="5">
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="auto"/>
-            <RowDefinition Height="auto"/>
-        </Grid.RowDefinitions>
+    <Border BorderBrush="AliceBlue" BorderThickness="1" CornerRadius="10">
         <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="auto" />
-            <ColumnDefinition Width="*"/>
-        </Grid.ColumnDefinitions>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="auto" />
-            <RowDefinition Height="auto"/>
-            <RowDefinition Height="auto"/>
-        </Grid.RowDefinitions>
-        <Label Margin="5" >Login</Label>
-        <Label Margin="5" Grid.Row="1">Password</Label>
-        <ComboBox Height="20" Grid.Column="1" Margin="5" x:Name="waitersCB"  DisplayMemberPath="name" SelectedValuePath="id" SelectedValue="{Binding ElementName=userControl, Path=WaiterId}"/>
-            <StackPanel Grid.Row="1" Grid.Column="1" Margin="5" VerticalAlignment="Center">
-                <PasswordBox Height="20" x:Name="passwordPB" GotFocus="passwordPB_GotFocus" KeyDown="passwordPB_KeyDown"  />
-                <TextBlock Visibility="Collapsed" x:Name="errorBlock" Background="Aqua" Foreground="Red" TextAlignment="Center" ><Italic> Пароль введено неправильно, спробуйте ще.</Italic></TextBlock>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+            </Grid.RowDefinitions>
+            <StackPanel>
+                <materialDesign:Snackbar Background="AntiqueWhite"  x:Name="errorBlock" IsActive="False">
+                    <materialDesign:SnackbarMessage ActionContent="{materialDesign:PackIcon Kind=WindowClose}" Foreground="Black" FontWeight="Bold"  ActionClick="SnackbarMessage_ActionClick" Content="Пароль введено неправильно, спробуйте ще."></materialDesign:SnackbarMessage>
+                </materialDesign:Snackbar>
             </StackPanel>
+            <Grid Grid.Row="1" Margin="10">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto" />
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                </Grid.RowDefinitions>
+                <TextBlock Margin="5" >
+                    <materialDesign:PackIcon Kind="LoginVariant" Width="100" Height="40" /></TextBlock>
+                <Label Margin="5" Grid.Row="1">
+                    <materialDesign:PackIcon Kind="TextboxPassword" Width="100" Height="40" />
+                </Label>
+                <ComboBox  Grid.Column="1" Margin="5" x:Name="waitersCB"  DisplayMemberPath="name" SelectedValuePath="id" SelectedValue="{Binding ElementName=userControl, Path=WaiterId}"/>
+                <StackPanel Grid.Row="1" Grid.Column="1" Margin="5" VerticalAlignment="Center">
+                    <PasswordBox x:Name="passwordPB" GotFocus="passwordPB_GotFocus" KeyDown="passwordPB_KeyDown"  />
+                </StackPanel>
+            </Grid>
+            <Grid Grid.Row="2" Height="50">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Button Margin="5" Click="Button_Click_Ok" Style="{StaticResource MaterialDesignToolForegroundButton}" ToolTip="Вхід">
+                    OK
+                </Button>
+                <Button Margin="5" Grid.Column="1" Click="Button_Click_Cancel" Style="{StaticResource MaterialDesignToolForegroundButton}" ToolTip="Закрити програму" materialDesign:ButtonAssist.CornerRadius="10">
+                    Cancel
+                </Button>
+            </Grid>
         </Grid>
-        <Grid Grid.Row="1" Height="40">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition/>
-                <ColumnDefinition/>
-            </Grid.ColumnDefinitions>
-            <Button Click="Button_Click_Ok" Margin="5" Template="{StaticResource RoundedButtonTemplate}">Ok</Button>
-            <Button Grid.Column="1" Click="Button_Click_Cancel" Margin="5" Template="{StaticResource RoundedButtonTemplate}">Cancel</Button>
-        </Grid>
-
-    </Grid>
     </Border>
 </UserControl>

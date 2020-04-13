@@ -5,9 +5,16 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:RestoranClient"
         mc:Ignorable="d"
-        Title = "Клієнт офіціанта" Height="450" Width="800" Loaded="Window_Loaded">
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        TextElement.FontWeight="Regular"
+        TextElement.FontSize="13"
+        TextOptions.TextFormattingMode="Ideal"
+        TextOptions.TextRenderingMode="Auto"
+        FontFamily="{DynamicResource MaterialDesignFont}"
+        Title = "Клієнт офіціанта" Height="450" Width="800" Loaded="Window_Loaded" Background="{StaticResource MaterialDesignBackground}">
     <Grid>
-        <local:Login x:Name="login" HorizontalAlignment="Center" Width="400" VerticalAlignment="Center" BorderBrush="Black" Background="AliceBlue" LoginResult="Login_LoginResult"/>
+        <local:Login x:Name="login" HorizontalAlignment="Center" BorderBrush="AliceBlue"  Width="400" VerticalAlignment="Center" Background="{StaticResource MaterialDesignBackground}" LoginResult="Login_LoginResult"/>
         <Grid x:Name="mainForm" Visibility="Collapsed">
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
@@ -32,6 +39,5 @@
         </DataGrid>
     </Grid>
         <local:OrderEdit x:Name="orderEdit" Visibility="Collapsed" OnCancelOrder="orderEdit_OnCancelOrder" OnSaveOrder="orderEdit_OnSaveOrder"/>
-
     </Grid>
 </Window>

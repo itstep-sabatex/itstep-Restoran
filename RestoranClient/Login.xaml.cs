@@ -69,8 +69,9 @@ namespace RestoranClient
                     passwordCounter--;
                     if (passwordCounter == 0)
                         LoginResult?.Invoke(null, string.Empty);
-                    errorBlock.Text = $"Пароль введено неправильно, спробуйте ще {passwordCounter} раз.";
-                    errorBlock.Visibility = Visibility.Visible;
+                    errorBlock.Message.Content = $"Пароль введено неправильно, спробуйте ще {passwordCounter} раз.";
+                    errorBlock.IsActive = true;
+
                 }
             }
 
@@ -97,6 +98,11 @@ namespace RestoranClient
         {
             if (e.Key == Key.Enter)
                 CheckPassword();
+        }
+
+        private void SnackbarMessage_ActionClick(object sender, RoutedEventArgs e)
+        {
+            errorBlock.IsActive = false;
         }
     }
 }
