@@ -64,6 +64,11 @@ namespace RestoranClient
                 {
                     LoginResult?.Invoke(r.Id, r.Name);
                 }
+                else if (passwordPB.Password == "")
+                {
+                    errorBlock.Message.Content = "Поле пароль не може бути пустим";
+                    errorBlock.IsActive = true;
+                }
                 else
                 {
                     passwordCounter--;
@@ -91,7 +96,7 @@ namespace RestoranClient
 
         private void passwordPB_GotFocus(object sender, RoutedEventArgs e)
         {
-            errorBlock.Visibility = Visibility.Collapsed;
+            errorBlock.IsActive = false;
         }
 
         private void passwordPB_KeyDown(object sender, KeyEventArgs e)

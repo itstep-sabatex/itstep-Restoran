@@ -12,8 +12,14 @@
         TextOptions.TextFormattingMode="Ideal"
         TextOptions.TextRenderingMode="Auto"
         FontFamily="{DynamicResource MaterialDesignFont}"
-        Title = "Клієнт офіціанта" Height="450" Width="800" Loaded="Window_Loaded" Background="{StaticResource MaterialDesignBackground}">
+        Title = "Клієнт офіціанта" Height="450" WindowStyle="ThreeDBorderWindow" Width="800" MinHeight="450" MinWidth="500" Loaded="Window_Loaded" Background="{StaticResource MaterialDesignBackground}" Icon="C:\Users\pokri\Source\Repos\sabatex\Restoran\RestoranClient\favicon.ico">
     <Grid>
+        <materialDesign:Card x:Name="logo" HorizontalAlignment="Center" VerticalAlignment="Top" Padding="5" Margin="0 5">
+            <StackPanel>
+                <Image Height="40" Source="C:\Users\pokri\Source\Repos\sabatex\Restoran\RestoranClient\favicon.ico"></Image>
+                <TextBox FontSize="20px" FontWeight="Bold">Restoran Client App</TextBox>
+            </StackPanel>
+        </materialDesign:Card>
         <local:Login x:Name="login" HorizontalAlignment="Center" BorderBrush="AliceBlue"  Width="400" VerticalAlignment="Center" Background="{StaticResource MaterialDesignBackground}" LoginResult="Login_LoginResult"/>
         <Grid x:Name="mainForm" Visibility="Collapsed">
         <Grid.RowDefinitions>

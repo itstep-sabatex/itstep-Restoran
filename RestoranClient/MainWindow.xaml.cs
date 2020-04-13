@@ -156,6 +156,7 @@ namespace RestoranClient
                 Config.WaiterId = arg1.Value;
                 Config.WaiterName = arg2;
                 Title = $"Офіціант {Config.WaiterName} : {DateTime.Now}";
+                logo.Visibility = Visibility.Collapsed;
                 login.Visibility = Visibility.Hidden;
                 RefreshGrid();
                 mainForm.Visibility = Visibility.Visible;
