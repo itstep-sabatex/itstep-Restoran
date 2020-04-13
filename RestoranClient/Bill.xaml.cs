@@ -14,18 +14,19 @@ using System.Windows.Shapes;
 namespace RestoranClient
 {
     /// <summary>
-    /// Логика взаимодействия для Bill.xaml
+    /// Логика взаимодействия для MakeBill.xaml
     /// </summary>
-    public partial class BillDetail : UserControl
+    public partial class Bill : UserControl
     {
-        public BillDetail()
+        public event Action<int?, string> BillResult;
+        public Bill()
         {
             InitializeComponent();
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-
+            BillResult.Invoke(null, String.Empty);
         }
     }
 }

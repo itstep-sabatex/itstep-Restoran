@@ -172,7 +172,18 @@ namespace RestoranClient
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
+            //TODO: Додати Bill.xaml
+            dg.Visibility = Visibility.Collapsed;
+            bill.Visibility = Visibility.Visible;
+        }
 
+        private void bill_BillResult(int? arg1, string arg2)
+        {
+            if (arg1 == null)
+            {
+                bill.Visibility = Visibility.Collapsed;
+                dg.Visibility = Visibility.Visible;
+            }
         }
     }
 

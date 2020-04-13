@@ -39,5 +39,6 @@
         </DataGrid>
     </Grid>
         <local:OrderEdit x:Name="orderEdit" Visibility="Collapsed" OnCancelOrder="orderEdit_OnCancelOrder" OnSaveOrder="orderEdit_OnSaveOrder"/>
+        <local:Bill BillResult="bill_BillResult" x:Name="bill" Visibility="Collapsed"></local:Bill>
     </Grid>
 </Window>
