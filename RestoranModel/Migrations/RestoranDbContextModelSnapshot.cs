@@ -3,17 +3,15 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
-using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using RestoranClient.Data;
+using RestoranModel.Data;
 
-namespace RestoranClient.Migrations
+namespace RestoranModel.Migrations
 {
     [DbContext(typeof(RestoranDbContext))]
-    [Migration("20200414182458_add-users")]
-    partial class addusers
+    partial class RestoranDbContextModelSnapshot : ModelSnapshot
     {
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -21,7 +19,7 @@ namespace RestoranClient.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("RestoranClient.Models.Abonent", b =>
+            modelBuilder.Entity("RestoranModel.Models.Abonent", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -62,7 +60,7 @@ namespace RestoranClient.Migrations
                         });
                 });
 
-            modelBuilder.Entity("RestoranClient.Models.ClientCards", b =>
+            modelBuilder.Entity("RestoranModel.Models.ClientCards", b =>
                 {
                     b.Property<Guid>("Id")
                         .HasColumnType("uniqueidentifier");
@@ -82,7 +80,7 @@ namespace RestoranClient.Migrations
                     b.ToTable("ClientCards");
                 });
 
-            modelBuilder.Entity("RestoranClient.Models.Detail", b =>
+            modelBuilder.Entity("RestoranModel.Models.Detail", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -226,7 +224,7 @@ namespace RestoranClient.Migrations
                         });
                 });
 
-            modelBuilder.Entity("RestoranClient.Models.FoodItem", b =>
+            modelBuilder.Entity("RestoranModel.Models.FoodItem", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -348,7 +346,7 @@ namespace RestoranClient.Migrations
                         });
                 });
 
-            modelBuilder.Entity("RestoranClient.Models.Order", b =>
+            modelBuilder.Entity("RestoranModel.Models.Order", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -480,7 +478,7 @@ namespace RestoranClient.Migrations
                         });
                 });
 
-            modelBuilder.Entity("RestoranClient.Models.User", b =>
+            modelBuilder.Entity("RestoranModel.Models.User", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -524,7 +522,7 @@ namespace RestoranClient.Migrations
                         });
                 });
 
-            modelBuilder.Entity("RestoranClient.Models.UserGroup", b =>
+            modelBuilder.Entity("RestoranModel.Models.UserGroup", b =>
                 {
                     b.Property<int>("UserId")
                         .HasColumnType("int");
@@ -564,25 +562,25 @@ namespace RestoranClient.Migrations
                         });
                 });
 
-            modelBuilder.Entity("RestoranClient.Models.Detail", b =>
+            modelBuilder.Entity("RestoranModel.Models.Detail", b =>
                 {
-                    b.HasOne("RestoranClient.Models.Order", null)
+                    b.HasOne("RestoranModel.Models.Order", null)
                         .WithMany("Details")
                         .HasForeignKey("OrderId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("RestoranClient.Models.Order", b =>
+            modelBuilder.Entity("RestoranModel.Models.Order", b =>
                 {
-                    b.HasOne("RestoranClient.Models.Abonent", "Abonent")
+                    b.HasOne("RestoranModel.Models.Abonent", "Abonent")
                         .WithMany()
                         .HasForeignKey("AbonentId");
                 });
 
-            modelBuilder.Entity("RestoranClient.Models.UserGroup", b =>
+            modelBuilder.Entity("RestoranModel.Models.UserGroup", b =>
                 {
-                    b.HasOne("RestoranClient.Models.User", "User")
+                    b.HasOne("RestoranModel.Models.User", "User")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)

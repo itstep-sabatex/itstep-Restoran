@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace RestoranClient.Models
+namespace RestoranModel.Models
 {
     public partial class ClientCards
     {

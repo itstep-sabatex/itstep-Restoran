@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace RestoranClient.Models
+namespace RestoranModel.Models
 {
-    public enum FixSource
+    public enum Group
     {
-        Kitchen,Bar
+        Waiters,BarMens,Admins
     }
 }

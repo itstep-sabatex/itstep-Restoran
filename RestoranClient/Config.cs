@@ -1,7 +1,7 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using RestoranClient.Data;
-using RestoranClient.Models;
+using RestoranModel.Data;
+using RestoranModel.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;

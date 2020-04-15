@@ -1,7 +1,7 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace RestoranClient.Migrations
+namespace RestoranModel.Migrations
 {
     public partial class initial : Migration
     {
@@ -132,9 +132,10 @@ namespace RestoranClient.Migrations
                 columns: new[] { "Id", "Name", "Password" },
                 values: new object[,]
                 {
-                    { 3, "Ivanka", "3333" },
+                    { 4, "Ruslan", "4444" },
+                    { 2, "Suzane", "2222" },
                     { 1, "Andrea", "1111" },
-                    { 2, "Suzane", "2222" }
+                    { 3, "Ivanka", "3333" }
                 });
 
             migrationBuilder.InsertData(
@@ -153,7 +154,7 @@ namespace RestoranClient.Migrations
                 columns: new[] { "id", "name", "price" },
                 values: new object[,]
                 {
-                    { 1, "Bear", 45.00m },
+                    { 2, "Borch", 50.00m },
                     { 16, "Whiskey", 1000.00m },
                     { 15, "water", 40.00m },
                     { 14, "Vodka", 300.00m },
@@ -161,13 +162,13 @@ namespace RestoranClient.Migrations
                     { 12, "Salad", 100.00m },
                     { 11, "pizza", 95.00m },
                     { 10, "ketchup", 300.00m },
+                    { 9, "IceCream", 50.00m },
                     { 7, "Cofee", 25.00m },
                     { 6, "Coca Cola", 40.00m },
                     { 5, "chicken with poatoes", 95.00m },
                     { 4, "Chicken soup", 45.00m },
                     { 3, "bread", 5.00m },
-                    { 2, "Borch", 50.00m },
-                    { 9, "IceCream", 50.00m },
+                    { 1, "Bear", 45.00m },
                     { 8, "Duck soup", 45.00m }
                 });
 
@@ -194,7 +195,9 @@ namespace RestoranClient.Migrations
                 {
                     { 1, 0 },
                     { 2, 0 },
-                    { 3, 0 }
+                    { 3, 0 },
+                    { 3, 1 },
+                    { 4, 1 }
                 });
 
             migrationBuilder.InsertData(

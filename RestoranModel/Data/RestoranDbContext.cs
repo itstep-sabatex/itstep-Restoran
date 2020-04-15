@@ -1,11 +1,11 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using RestoranClient.Models;
+using RestoranModel.Models;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace RestoranClient.Data
+namespace RestoranModel.Data
 {
     public class RestoranDbContext : DbContext
     {
@@ -19,7 +19,7 @@ namespace RestoranClient.Data
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             base.OnConfiguring(optionsBuilder);
-            optionsBuilder.UseSqlServer("Data Source = desktop-bu8vu83\\sqlexpress; Initial Catalog = RestorantRelease; Integrated Security = True");
+            optionsBuilder.UseSqlServer("Data Source = desktop-bu8vu83\\sqlexpress; Initial Catalog = Restorant; Integrated Security = True");
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

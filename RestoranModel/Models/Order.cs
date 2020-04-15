@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace RestoranClient.Models
+namespace RestoranModel.Models
 {
     public class Order
     {
