@@ -23,7 +23,7 @@ namespace RestoranClient
     {
         public event Action<int?, string> LoginResult;
         public int WaiterId { get; set; }
-        public Waiter[] Waiters { get; set; }
+        public User[] Waiters { get; set; }
         private int passwordCounter { get; set; } = 3;
 
         public Login()
@@ -59,7 +59,7 @@ namespace RestoranClient
         {
             using (var context = new RestoranDbContext())
             {
-                var r = context.Waiters.SingleOrDefault(s => s.Id == WaiterId);
+                var r = context.Users.SingleOrDefault(s => s.Id == WaiterId);
                 if (r?.Password == passwordPB.Password)
                 {
                     LoginResult?.Invoke(r.Id, r.Name);
@@ -80,7 +80,7 @@ namespace RestoranClient
         {
             using (var context = new RestoranDbContext())
             {
-                var r = context.Waiters.Select(s => new { id = s.Id, name = s.Name }).ToArray();
+                var r = context.Users.Select(s => new { id = s.Id, name = s.Name }).ToArray();
                 waitersCB.ItemsSource = r;
                 if (r.Length == 0)
                     throw new Exception("В базі відсутні офіціанти");

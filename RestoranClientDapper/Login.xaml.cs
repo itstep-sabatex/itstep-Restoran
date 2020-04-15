@@ -1,4 +1,6 @@
-﻿using RestoranClient.Data;
+﻿using Dapper;
+using Microsoft.Data.SqlClient;
+using RestoranClient.Data;
 using RestoranClient.Models;
 using System;
 using System.Collections.Generic;
@@ -57,9 +59,10 @@ namespace RestoranClient
 
         private void CheckPassword()
         {
-            using (var context = new RestoranDbContext())
+            using (var context = new SqlConnection(Config.ConnectionString))
             {
-                var r = context.Waiters.SingleOrDefault(s => s.Id == WaiterId);
+                string sql = "select * from Waiters where Id=@id";
+                var r = context.QuerySingleOrDefault(sql,new {id = WaiterId });
                 if (r?.Password == passwordPB.Password)
                 {
                     LoginResult?.Invoke(r.Id, r.Name);
@@ -73,7 +76,6 @@ namespace RestoranClient
                     errorBlock.Visibility = Visibility.Visible;
                 }
             }
-
         }
 
         private void UserControl_Loaded(object sender, RoutedEventArgs e)

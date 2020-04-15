@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using RestoranClient.Data;
 
 namespace RestoranClient.Data.Migrations
 {
     [DbContext(typeof(RestoranDbContext))]
-    partial class RestoranDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200414181936_rename-waiters")]
+    partial class renamewaiters
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -513,12 +515,6 @@ namespace RestoranClient.Data.Migrations
                             Id = 3,
                             Name = "Ivanka",
                             Password = "3333"
-                        },
-                        new
-                        {
-                            Id = 4,
-                            Name = "Ruslan",
-                            Password = "4444"
                         });
                 });
 
@@ -549,16 +545,6 @@ namespace RestoranClient.Data.Migrations
                         {
                             UserId = 3,
                             Group = 0
-                        },
-                        new
-                        {
-                            UserId = 4,
-                            Group = 1
-                        },
-                        new
-                        {
-                            UserId = 3,
-                            Group = 1
                         });
                 });
 

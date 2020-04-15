@@ -15,6 +15,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Dapper;
 
 namespace RestoranClient
 {
@@ -35,11 +36,8 @@ namespace RestoranClient
 
         public void ShowOrderEdit(int?  id = null)
         {
-           
-             
             using (var context = new RestoranDbContext())
             {
-                var directionSQL = context.Abonent.FromSqlRaw("SELECT * FROM dbo.abonent").ToList();
                 if (id == null)
                 {
                     Order = new Order
@@ -53,7 +51,7 @@ namespace RestoranClient
                 }
                 else
                 {
-                    Order = context.Order.Include("Details").SingleOrDefault(pk => pk.Id == id);
+                      Order = context.Order.Include("Details").SingleOrDefault(pk => pk.Id == id);
                 }
             }
             cbAbonent.ItemsSource = Config.Abonents;

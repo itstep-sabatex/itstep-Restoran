@@ -9,12 +9,13 @@ namespace RestoranClient.Data
 {
     public class RestoranDbContext : DbContext
     {
-        public DbSet<Waiter> Waiters { get; set; }
+        public DbSet<User> Users { get; set; }
         public DbSet<Order> Order { get; set; }
         public DbSet<Abonent> Abonent { get; set; }
         //public DbSet<SourceItem> Sources { get; set; }
         public DbSet<FoodItem> FoodItems { get; set; }
         public DbSet<Detail> Details { get; set; }
+        public DbSet<UserGroup> UserGroups { get; set; }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             base.OnConfiguring(optionsBuilder);
@@ -134,11 +135,22 @@ new Detail { Id = 11, ItemsId = 16, OrderId = 9, Price = 1000.00M, Count = 5.000
 new Detail { Id = 12, ItemsId = 11, OrderId = 9, Price = 95.00M, Count = 20.000M, Bill = 1900.00M });
 
             });
-            modelBuilder.Entity<Waiter>(entity =>
+            modelBuilder.Entity<User>(entity =>
             {
-                 entity.HasData(new Waiter { Id = 1, Name = "Andrea", Password = "1111" },
-                               new Waiter { Id = 2, Name = "Suzane", Password = "2222" },
-                               new Waiter { Id = 3, Name = "Ivanka", Password = "3333" });
+                entity.HasData(new User { Id = 1, Name = "Andrea", Password = "1111" },
+                              new User { Id = 2, Name = "Suzane", Password = "2222" },
+                              new User { Id = 3, Name = "Ivanka", Password = "3333" },
+                              new User { Id = 4, Name = "Ruslan", Password = "4444" });
+            });
+            modelBuilder.Entity<UserGroup>(entity =>
+            {
+                entity.HasKey("UserId","Group");
+                entity.HasData(new UserGroup { UserId = 1, Group = Group.Waiters },
+                    new UserGroup { UserId = 2, Group = Group.Waiters },
+                    new UserGroup { UserId = 3, Group = Group.Waiters },
+                    new UserGroup { UserId = 4, Group = Group.Barmens },
+                    new UserGroup { UserId = 3, Group = Group.Barmens });
+            
             });
         }
 

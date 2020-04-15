@@ -84,7 +84,20 @@ namespace RestoranClient
             {
                 string sqlmainWindowViewModel = $"select [Order].Id, [Order].time_order,[Order].Bill,[abonent].name as abonent  from [Order] left join abonent on abonent.id = [Order].abonent_id where[Order].waiter_id = @waiter_id";
                 var r = connection.Query<MainWindowViewModel>(sqlmainWindowViewModel,new { waiter_id = Config.WaiterId }).ToArray();
+
                 dg.ItemsSource = new ObservableCollection<MainWindowViewModel>(r);
+
+                // Stored procedure
+                // INSERT statement
+                // UPDATE statement
+                // DELETE statement
+                var i = connection.Execute(sqlmainWindowViewModel, new { waiter_id = Config.WaiterId });
+                // ExecuteScalar
+                var sc = connection.ExecuteScalar<int>("Select Id from Waiters");
+
+
+
+
             }
         
         }
@@ -129,10 +142,31 @@ namespace RestoranClient
         {
             using (var context = new RestoranDbContext())
             {
-                //context.Order.Add(obj);
-                //
-                //obj.Details.Clear();
+                var connect = context.Database.GetDbConnection();
+                connect.BeginTransaction();
+                if (obj.Id == 0)
+                {
+                    obj.Id = connect.ExecuteScalar<int>("SELECT IDENT_CURRENT('Order')");
+                    connect.Execute("INSERT INTO [Order] (Id,[waiter_id],[abonent_id],[time_order],[Bill],[FixedSource]) VALUES(@Id, @waiter_id, @abonent_id, @time_order, @Bill, @FixedSource); ",new { Id = obj.Id, waiter_id = obj.WaiterId, abonent_id = obj.AbonentId, time_order = obj.TimeOrder, Bill = obj.Bill, FixedSource= obj.FixedSource });
+                }
+                else
+                {
+                    connect.Execute("UPDATE [Order] SET waiter_id =  @waiter_id, abonent_id = @abonent_id, time_order = @time_order, Bill = @Bill, FixedSource = @FixedSource,end_order = @end_order,Paid = @Paid)  WHERE Id=@Id; ", new { Id = obj.Id, waiter_id = obj.WaiterId, abonent_id = obj.AbonentId, time_order = obj.TimeOrder, Bill = obj.Bill, FixedSource = obj.FixedSource, end_order = obj.EndOrder, Paid = obj.Paid });
+                }
+                foreach (var item in obj.Details)
+                {
+                    if (item.Id==0)
+                    {
+                        item.OrderId = obj.Id;
+                    }
+                    else
+                    {
+
+                    }
+                }
+ 
                 context.Order.Update(obj);
+
                 //context.SaveChanges();
 
                 //obj.Details.Add(new Detail() { ItemsId = 1,Price = 10,Count = 2,Bill=20
