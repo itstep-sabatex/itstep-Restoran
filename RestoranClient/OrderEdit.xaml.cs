@@ -76,8 +76,8 @@ namespace RestoranClient
         {
             Visibility = Visibility.Hidden;
             Order.AbonentId = (int)cbAbonent.SelectedValue;
-            Order.SourceId = (int)cbSource.SelectedValue;
-            Order.FixedSource = (FixSource)(Order.SourceId - 1);
+            Order.FixedSource = (FixSource)cbSource.SelectedValue;
+            Order.FixedSource = (FixSource)(cbSource.SelectedIndex);
             var cl = dgOrder.ItemsSource as ObservableCollection<Detail>;
             decimal bill = 0;
             foreach (var d in cl)
