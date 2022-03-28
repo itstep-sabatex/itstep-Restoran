@@ -134,7 +134,7 @@ namespace RestoranClient
 
             mainForm.Visibility = Visibility.Collapsed;
             
-            orderEdit.ShowOrderEdit();
+            orderEdit.ShowOrderEdit(mainForm);
         }
 
 
